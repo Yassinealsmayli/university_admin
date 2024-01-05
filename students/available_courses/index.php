@@ -1,9 +1,9 @@
 <?php 
-error_reporting(0);
-if($_SERVER["HTTP_REFERER"]!="http://localhost:8080/project-php/registration/index.php"&&$_SERVER['REQUEST_METHOD']=='GET'&&realpath(__FILE__)==realpath($_SERVER['SCRIPT_FILENAME'])){
-    header('HTTP/1.0 403 Forbidden',true,403);
-    die("<h2>Access denied!</h2><p>This file is private.</p>");
-}
+// error_reporting(0);
+// if($_SERVER["HTTP_REFERER"]!="http://localhost:8080/project-php/registration/index.php"&&$_SERVER['REQUEST_METHOD']=='GET'&&realpath(__FILE__)==realpath($_SERVER['SCRIPT_FILENAME'])){
+//     header('HTTP/1.0 403 Forbidden',true,403);
+//     die("<h2>Access denied!</h2><p>This file is private.</p>");
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +11,16 @@ if($_SERVER["HTTP_REFERER"]!="http://localhost:8080/project-php/registration/ind
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+    .btn-login {
+    background: greenyellow;
+    font-weight: bolder;
+    color: white;
+    box-shadow: 0px 0px 0px 2px white;
+    border-radius: 3px;
+    padding: 5px 2em;
+    margin: 10px;
+    transition: 0.5s;
+    }
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -69,7 +79,7 @@ if($_SERVER["HTTP_REFERER"]!="http://localhost:8080/project-php/registration/ind
     $dbname = "courses";
     try {
         // Create a PDO connection
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user);
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $user);
         $pdo->setAttribute(
             PDO::ATTR_ERRMODE,
             PDO::ERRMODE_EXCEPTION
@@ -100,6 +110,7 @@ if($_SERVER["HTTP_REFERER"]!="http://localhost:8080/project-php/registration/ind
         // Display courses
         echo "<h1>Student name: {$student[0]['student_name']}";
         echo '<h2>profile no:'.$studentId.'</h2><br>';
+        echo "<form action='./validate.php' method='POST'>";
         echo "<table>";
         echo "
         <tr>
@@ -117,18 +128,11 @@ if($_SERVER["HTTP_REFERER"]!="http://localhost:8080/project-php/registration/ind
             </td>
         </tr>";
         echo "<center><h1><b>Available Courses</b></h1></center>";
+        
         foreach ($courses as $course) {
-            $grp = 0;
-            $txt = "<td></td>";
-            if($course['optional']!=0){
-                $sql = "SELECT * FROM opt_courses WHERE course_id =". $course['course_id'];
-                $result = $conn->query($sql);
-                echo $grp;
-                // Output data
-                echo 'hi';
-                $row = $result->fetch_assoc();
-                $grp = $row["grp"];
-                $txt = "<td><input type='checkbox' group='$grp'></td>";
+            $grp = $course['optional'];
+            if($course['optional']==0){
+            $grp = $course['course_name'];
             }
             
             echo "
@@ -143,11 +147,13 @@ if($_SERVER["HTTP_REFERER"]!="http://localhost:8080/project-php/registration/ind
                 </td>
                 <td>
                     {$course['course_credit']}
-                </td>"
-                .$txt.
+                </td>".
+                "<td><input type='radio' name='".$grp."' value='".$course["course_code"]."'>".
                 "</tr>";
         }
+        
         echo "</table>";
+        echo "<center><input  type='submit' value='submit' class='btn-login' id='submit'></center></form>";
     
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
