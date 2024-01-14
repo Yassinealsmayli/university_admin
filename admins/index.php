@@ -17,7 +17,7 @@
   </div>
   <p class='msg'>administrator</p>
   <div class='form'>
-    <form action="./validate.php" method="POST">
+    <form action="C:\xampp\htdocs\dalal\index.html" method="POST">
   <input type="text" dir="rtl"  placeholder='رقم الحساب' class='text' id='username' name="username" required><br>
   <input type="password" dir="rtl" placeholder='الرقم السري' class='password' name='password'><br>
   <center><input type="submit" value="login" class='btn-login' id='login'></center>

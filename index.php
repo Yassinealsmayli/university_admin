@@ -14,3 +14,4 @@
     header("location: ./registration/index.php", true);
     exit();
     ?>
+
