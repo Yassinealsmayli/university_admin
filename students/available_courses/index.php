@@ -65,18 +65,19 @@
 <body>
     <?php
     // Database connection parameters
-    if(!session_id())session_start();
-    include "../../globals.php";
-    $servername = $_SESSION["servername"];
-    $user = $_SESSION["user"];
-    $pass = $_SESSION["pass"];
-    $dbname = $_SESSION["dbname"];
-    $studentId = filter_var($_GET['username'],FILTER_VALIDATE_INT);
-    
     $servername = "127.0.0.1";
     $user = "root";
     $pass = "password";
     $dbname = "courses";
+    $iddb = new PDO("mysql:host=$servername;dbname=my_data", $user);
+    $idQuery = "SELECT id FROM mData where I = 1";
+    $stmts = $iddb->prepare($idQuery);
+    $stmts->execute();
+    $s = $stmts->fetchAll(PDO::FETCH_ASSOC);
+    $studentId=$s[0]["id"];
+    
+    
+    
     try {
         // Create a PDO connection
         $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $user);
@@ -110,6 +111,7 @@
         // Display courses
         echo "<h1>Student name: {$student[0]['student_name']}";
         echo '<h2>profile no:'.$studentId.'</h2><br>';
+        
         echo "<form action='./validate.php' method='POST'>";
         echo "<table>";
         echo "
@@ -153,7 +155,7 @@
         }
         
         echo "</table>";
-        echo "<center><input  type='submit' value='submit' class='btn-login' id='submit'></center></form>";
+        echo "<center><input  type='submit' value='submit' class='btn-login' id='submit'></center></form><center><a href='../home/index.php'><input  type='submit' value='back' class='btn-login' id='submit'></a>";
     
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();

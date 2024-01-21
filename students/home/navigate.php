@@ -10,7 +10,11 @@
 </head>
 <body>
     <p>loading...</p>
-    <?php 
-    header("location: ./registration/index.php", true);
+    <?php
+    include "./index.php"; 
+    if($_SERVER['REQUEST_METHOD']=='GET'){
+        header("location: ../available_course/index.php/?username=$global_StudentId", true);
+    }
+    
     exit();
     ?>

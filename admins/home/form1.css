@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+#tabs {
+  margin-top: 20px;
+}
+
+#tabs button {
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#studentInformationTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#studentInformationTable th, #studentInformationTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.btn-grp {
+  display: flex;
+}
+
+.btn-grp input {
+  margin-right: 5px;
+}
+
+/* Adjust as needed for your button styles */
+.btn {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
