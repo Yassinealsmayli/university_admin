@@ -76,6 +76,8 @@
     </div>
     <header>
 <nav><buton><a href="search.php">Search</a></buton></nav>
+<a href="../add_page/">course information</a><br>
+<a href="./StudentInformationForm.php">student registration</a>
 </header>
 <div id="studentInfoDiv" class="tab-content">
 <table border="5" id="studentInformationTable">
@@ -198,14 +200,14 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $query = "SELECT * FROM student_info";
+    $query = "SELECT * FROM students";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo "<tr>";
-        echo "<td>{$row['university_id']}</td>";
-        echo "<td>{$row['university_year']}</td>";
+        echo "<td>{$row['student_id']}</td>";
+        echo "<td>{$row['year']}</td>";
         echo "<td>{$row['major']}</td>";
         echo "</tr>";
     }

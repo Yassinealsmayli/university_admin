@@ -20,9 +20,9 @@ try {
 function searchUniversities($pdo, $searchData)
 {
     try {
-        $query = "SELECT * FROM student_registration1 
-                  WHERE university_id LIKE :university_id 
-                     AND university_year LIKE :university_year 
+        $query = "SELECT * FROM student_info
+                  WHERE student_id LIKE :id 
+                     AND year LIKE :year 
                      AND major LIKE :major";
 
         $stmt = $pdo->prepare($query);
@@ -45,8 +45,8 @@ function searchUniversities($pdo, $searchData)
 // Check if the search query is present for universities
 if (isset($_GET['search_universities'])) {
     $searchDataUniversities = array(
-        'university_id' => isset($_GET['search_universities']['university_id']) ? $_GET['search_universities']['university_id'] : '',
-        'university_year' => isset($_GET['search_universities']['university_year']) ? $_GET['search_universities']['university_year'] : '',
+        'student_id' => isset($_GET['search_universities']['student_id']) ? $_GET['search_universities']['student_id'] : '',
+        'year' => isset($_GET['search_universities']['year']) ? $_GET['search_universities']['year'] : '',
         'major' => isset($_GET['search_universities']['major']) ? $_GET['search_universities']['major'] : '',
     );
 

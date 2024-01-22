@@ -51,7 +51,7 @@ try {
     $query = "SELECT * FROM student_info where id = $studentId";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
-
+    echo '<a href="../../admins/home/StudentInformationForm.php">student registration</a>';
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo "<span><br></span><center><a href='../available_courses/index.php'><input  type='submit' value='select courses' class='btn-login' id='submit'></a></center><span><br></span>";
         echo "<tr>";

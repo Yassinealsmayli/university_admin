@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
         $query = "INSERT INTO student_info (first_name, father_name, last_name, mother_name, birthday_date, place_of_birth, id_number, nationality, gender, phone_number, place_of_occupation, place_of_registration, governorate, judiciary) VALUES (
             '{$data['first_name']}', '{$data['father_name']}', '{$data['last_name']}', '{$data['mother_name']}', '{$data['birthday_date']}', '{$data['place_of_birth']}', '{$data['id_number']}', '{$data['nationality']}', '{$data['gender']}', '{$data['phone_number']}', '{$data['place_of_occupation']}', '{$data['place_of_registration']}', '{$data['governorate']}', '{$data['judiciary']}', '{$data['id']}'
         );
-        INSERT INTO students (student_id,pass, year, major)VALUES('{$data['id']}','500', '{$data['university_year']}', '{$data['major']}');
+        INSERT INTO students (student_id,pass, year, major)VALUES('{$data['id']}','500', '{$data['year']}', '{$data['major']}');
         ";
 
         $result = mysqli_query($dbc, $query);
